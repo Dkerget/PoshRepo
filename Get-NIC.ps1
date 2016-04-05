@@ -1,0 +1,1 @@
+Get-WmiObject -Class Win32_NetworkAdapterConfiguration -Filter "IPEnabled='TRUE'" | select DNSHostName, Description, MACAddress, DHCPenabled, IPAddress, IPSubnet, DefaultIPGateway, DNSServerSearchOrder
