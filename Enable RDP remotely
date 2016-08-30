@@ -1,0 +1,15 @@
+#For Clien WS
+ set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
+#Change Firewall rulles
+ netsh advfirewall firewall set rule name="Remote Desktop (TCP-In)" new enable=Yes profile=domain
+ netsh advfirewall firewall set rule name="Remote Desktop - RemoteFX (TCP-In)" new enable=Yes profile=domain
+# Enable secure RDP authentication
+set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
+# For Windows 2012 Server Core make sure that Firewall rule is set to alow access
+#To view your remote desktop firewall rule run this command:
+
+get-netfirewallrule -displaygroup "Remote Desktop" | ft Name,Enabled -autosize
+ # Now let’s enable remote desktop:
+
+ netsh advfirewall firewall set rule group="remote desktop" new enable=Yes
+
